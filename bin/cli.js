@@ -1,11 +1,9 @@
 #!/usr/bin/env node
-var lcov = require('../lib/index.js');
-var file = process.argv[2];
 
-lcov(file, function(err, data) {
-    if (err) {
-      return console.error(err)
-    }
+import { readFileSync } from 'node:fs';
+import { parse } from '../dist/index.js'
 
-    console.log(JSON.stringify(data));
-});
+const file = process.argv[2];
+const data = readFileSync(file).toString()
+const json = parse(data)
+console.log(JSON.stringify(json, null, 2));

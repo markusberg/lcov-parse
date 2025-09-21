@@ -4,23 +4,17 @@ Simple LCOV file parser
 
 ## Installation
 
-    npm install lcov-parse
-
+    npm install @markusberg/lcov-parse
 
 ## Usage
 
-    var parse = require('lcov-parse');
+    import { loadAndParse } from '@markusberg/lcov-parse'
+    const json = loadAndParse('./path/to/file.info')
 
-    parse('./path/to/file.info', function(err, data) {
-        //process the data here
-    });
+or if your lcov data is already loaded into a variable:
 
-or
-
-    parse(lcovString, function(err, data) {
-        //process the data here
-    });
-
+    import { parse } from '@markusberg/lcov-parse
+    const json = parse(lcovString)
 
 ## Formatting
 
@@ -70,7 +64,6 @@ It will return JSON like this:
 }
 ```
 
-
 ## Cli Usage
 
     lcov-parse ./lcov.info
@@ -78,13 +71,11 @@ It will return JSON like this:
 or
 
     cat lcov.info | xargs -0 lcov-parse
-   
-   
+
 ## Tests
 
     npm install && npm test
 
+or
 
-## Build Status
-
-[![Build Status](https://secure.travis-ci.org/davglass/lcov-parse.png?branch=master)](http://travis-ci.org/davglass/lcov-parse)
+    npm run test:watch

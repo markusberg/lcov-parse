@@ -1,2 +1,10 @@
-tests
-.travis.yml
+.node-version
+.prettierrc
+.husky/
+
+coverage/
+src/
+test-data/
+tsconfig.*
+*.tsbuildinfo
+
