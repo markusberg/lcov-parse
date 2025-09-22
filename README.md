@@ -1,28 +1,84 @@
 ## LCOV file parser
 
-Simple LCOV file parser
+Simple LCOV file parser to generate JSON and JSON-summary formatted reports.
 
 ## Installation
 
-    npm install @markusberg/lcov-parse
+```bash
+$ npm install @markusberg/lcov-parse
+```
 
 ## Usage
 
-    import { loadAndParse } from '@markusberg/lcov-parse'
-    const json = loadAndParse('./path/to/file.info')
+Basic usage for loading and parsing an `lcov.info` file:
 
-or if your lcov data is already loaded into a variable:
+```typescript
+import { loadAndParse, type CoverageReport } from "@markusberg/lcov-parse"
+const json: CoverageReport = loadAndParse("./path/to/file.info")
+```
 
-    import { parse } from '@markusberg/lcov-parse
-    const json = parse(lcovString)
+### Parsing already loaded data
+
+If your lcov data is already loaded into a variable you can call the parsing function directly:
+
+```typescript
+import { parse, type CoverageReport } from "@markusberg/lcov-parse"
+const lcovData: string = "TN:TestName\nSF:foobar.js\nend_of_record\n"
+const json: CoverageReport = parse(lcovData)
+```
+
+The `json` const will now contain this data:
+
+```json
+[
+  {
+    "file": "foobar.js",
+    "lines": { "found": 0, "hit": 0, "details": [] },
+    "functions": { "hit": 0, "found": 0, "details": [] },
+    "branches": { "hit": 0, "found": 0, "details": [] },
+    "title": "TestName"
+  }
+]
+```
+
+### JSON-summary
+
+The JSON-summary format is convenient for CI purposes:
+
+```typescript
+import {
+  loadAndParse,
+  generateSummary,
+  type CoverageReport,
+  type CoverageSummary,
+} from '@markusberg/lcov-parse
+
+const json: CoverageReport = loadAndParse('./path/to/file.info')
+const summary: CoverageSummary = generateSummary(json)
+```
+
+The `summary` const will now contain the following data:
+
+```json
+{
+  "foobar.js": {
+    "lines": { "total": 0, "covered": 0, "pct": 100 },
+    "functions": { "total": 0, "covered": 0, "pct": 100 },
+    "branches": { "total": 0, "covered": 0, "pct": 100 }
+  },
+  "total": {
+    "lines": { "total": 0, "covered": 0, "pct": 100 },
+    "functions": { "total": 0, "covered": 0, "pct": 100 },
+    "branches": { "total": 0, "covered": 0, "pct": 100 }
+  }
+}
+```
 
 ## Formatting
 
-Using this as a guide: http://ltp.sourceforge.net/coverage/lcov/geninfo.1.php
+The generated JSON will look like this:
 
-It will return JSON like this:
-
-```
+```json
  {
     "title": "Test #1",
     "file": "anim-base/anim-base-coverage.js",
@@ -64,18 +120,72 @@ It will return JSON like this:
 }
 ```
 
-## Cli Usage
+## CLI Usage
 
-    lcov-parse ./lcov.info
+In addition to the mandatory file name, the script takes two optional arguments:
+
+- `--summary`: generate a json-summary instead of a full json report
+- `--pretty`: indents and line breaks the json output
+
+For example:
+
+```bash
+$ npx lcov-parse --summary --pretty ./coverage/lcov.info
+```
+
+```json
+{
+  "src/index.ts": {
+    "lines": {
+      "total": 218,
+      "covered": 218,
+      "pct": 100
+    },
+    "functions": {
+      "total": 8,
+      "covered": 8,
+      "pct": 100
+    },
+    "branches": {
+      "total": 40,
+      "covered": 40,
+      "pct": 100
+    }
+  },
+  "total": {
+    "lines": {
+      "total": 218,
+      "covered": 218,
+      "pct": 100
+    },
+    "functions": {
+      "total": 8,
+      "covered": 8,
+      "pct": 100
+    },
+    "branches": {
+      "total": 40,
+      "covered": 40,
+      "pct": 100
+    }
+  }
+}
+```
 
 or
 
-    cat lcov.info | xargs -0 lcov-parse
+```bash
+$ cat lcov.info | xargs -0 lcov-parse
+```
 
 ## Tests
 
-    npm install && npm test
+```bash
+$ npm install && npm test
+```
 
-or
+or to run continuously, watching for changes:
 
-    npm run test:watch
+```bash
+$ npm run test:watch
+```

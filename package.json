@@ -2,7 +2,7 @@
   "name": "@markusberg/lcov-parse",
   "type": "module",
   "description": "Parse lcov results files and return JSON",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "author": "Dav Glass <davglass@gmail.com>",
   "contributors": [
     "Alan Gutierrez <alan@prettyrobots.com>",
@@ -46,7 +46,7 @@
     "build": "npm run clean && npm run build:prod",
     "build:prod": "tsc -p ./tsconfig.prod.json",
     "build:test": "tsc -p .",
-    "clean": "rimraf dist && rimraf *.tsbuildinfo",
+    "clean": "rimraf dist && rimraf *.tsbuildinfo && rimraf coverage && mkdir -p dist coverage",
     "prep": "npm install && husky && chmod ug+x .husky/*",
     "prepublishOnly": "npm run build",
     "test": "npm run clean && npm run test:one",
@@ -59,6 +59,6 @@
     "url": "http://github.com/markusberg/lcov-parse.git"
   },
   "lint-staged": {
-    "(*.ts|*.md)": "prettier --write --check"
+    "(*.ts|*.js|*.json|*.md)": "prettier --write --check"
   }
 }
