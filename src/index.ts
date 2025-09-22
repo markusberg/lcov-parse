@@ -201,7 +201,7 @@ export function generateSummary(report: CoverageReport): CoverageSummary {
     ? (total.branches.covered / total.branches.total) * 100
     : 100
 
-  return { total, ...summary }
+  return { ...summary, total }
 }
 
 /**

@@ -61,12 +61,12 @@ The `summary` const will now contain the following data:
 
 ```json
 {
-  "total": {
+  "foobar.js": {
     "lines": { "total": 0, "covered": 0, "pct": 100 },
     "functions": { "total": 0, "covered": 0, "pct": 100 },
     "branches": { "total": 0, "covered": 0, "pct": 100 }
   },
-  "foobar.js": {
+  "total": {
     "lines": { "total": 0, "covered": 0, "pct": 100 },
     "functions": { "total": 0, "covered": 0, "pct": 100 },
     "branches": { "total": 0, "covered": 0, "pct": 100 }
@@ -76,7 +76,7 @@ The `summary` const will now contain the following data:
 
 ## Formatting
 
-It will return JSON like this:
+The generated JSON will look like this:
 
 ```json
  {
@@ -120,10 +120,56 @@ It will return JSON like this:
 }
 ```
 
-## Cli Usage
+## CLI Usage
+
+In addition to the mandatory file name, the script takes two optional arguments:
+
+- `--summary`: generate a json-summary instead of a full json report
+- `--pretty`: indents and line breaks the json output
+
+For example:
 
 ```bash
-$ lcov-parse ./lcov.info
+$ npx lcov-parse --summary --pretty ./coverage/lcov.info
+```
+
+```json
+{
+  "src/index.ts": {
+    "lines": {
+      "total": 218,
+      "covered": 218,
+      "pct": 100
+    },
+    "functions": {
+      "total": 8,
+      "covered": 8,
+      "pct": 100
+    },
+    "branches": {
+      "total": 40,
+      "covered": 40,
+      "pct": 100
+    }
+  },
+  "total": {
+    "lines": {
+      "total": 218,
+      "covered": 218,
+      "pct": 100
+    },
+    "functions": {
+      "total": 8,
+      "covered": 8,
+      "pct": 100
+    },
+    "branches": {
+      "total": 40,
+      "covered": 40,
+      "pct": 100
+    }
+  }
+}
 ```
 
 or
@@ -138,7 +184,7 @@ $ cat lcov.info | xargs -0 lcov-parse
 $ npm install && npm test
 ```
 
-or
+or to run continuously, watching for changes:
 
 ```bash
 $ npm run test:watch

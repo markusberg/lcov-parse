@@ -59,6 +59,6 @@
     "url": "http://github.com/markusberg/lcov-parse.git"
   },
   "lint-staged": {
-    "(*.ts|*.md)": "prettier --write --check"
+    "(*.ts|*.js|*.json|*.md)": "prettier --write --check"
   }
 }
