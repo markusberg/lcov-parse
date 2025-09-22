@@ -6,4 +6,4 @@ import { parse } from '../dist/index.js'
 const file = process.argv[2];
 const data = readFileSync(file).toString()
 const json = parse(data)
-console.log(JSON.stringify(json, null, 2));
+console.log(JSON.stringify(json));
