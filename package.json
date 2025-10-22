@@ -2,7 +2,7 @@
   "name": "@markusberg/lcov-parse",
   "type": "module",
   "description": "Parse lcov results files and return JSON",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "author": "Dav Glass <davglass@gmail.com>",
   "contributors": [
     "Alan Gutierrez <alan@prettyrobots.com>",
@@ -50,7 +50,8 @@
     "prep": "npm install && husky && chmod ug+x .husky/*",
     "prepublishOnly": "npm run build",
     "test": "npm run clean && npm run test:one",
-    "test:one": "npm run build:test && node --enable-source-maps --test --experimental-test-coverage --test-reporter=spec --test-reporter=lcov --test-reporter-destination=stdout --test-reporter-destination=./coverage/lcov.info ./dist/**/*.test.js",
+    "test:one": "npm run build:test && node --enable-source-maps --test --experimental-test-coverage --test-reporter=spec --test-reporter=lcov --test-reporter-destination=stdout --test-reporter-destination=./coverage/lcov.info ./dist/**/*.test.js && npm run test:cov",
+    "test:cov": "./bin/cli.js --summary ./coverage/lcov.info > ./coverage/coverage-summary.json",
     "test:watch": "npm run clean && nodemon -e ts -w ./src --exec 'npm run test:one'"
   },
   "license": "BSD-3-Clause",
