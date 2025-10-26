@@ -2,7 +2,7 @@
   "name": "@markusberg/lcov-parse",
   "type": "module",
   "description": "Parse lcov results files and return JSON",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "author": "Dav Glass <davglass@gmail.com>",
   "contributors": [
     "Alan Gutierrez <alan@prettyrobots.com>",
@@ -37,6 +37,7 @@
   "devDependencies": {
     "@types/node": "^24.5.2",
     "husky": "^9.1.7",
+    "lint-staged": "^16.2.6",
     "nodemon": "^3.1.10",
     "prettier": "^3.6.2",
     "typescript": "^5.9.2"
