@@ -39,14 +39,13 @@
     "husky": "^9.1.7",
     "nodemon": "^3.1.10",
     "prettier": "^3.6.2",
-    "rimraf": "^6.0.1",
     "typescript": "^5.9.2"
   },
   "scripts": {
     "build": "npm run clean && npm run build:prod",
     "build:prod": "tsc -p ./tsconfig.prod.json",
     "build:test": "tsc -p .",
-    "clean": "rimraf dist && rimraf *.tsbuildinfo && rimraf coverage && mkdir -p dist coverage",
+    "clean": "rm -fr dist *.tsbuildinfo coverage && mkdir -p dist coverage",
     "prep": "npm install && husky && chmod ug+x .husky/*",
     "prepublishOnly": "npm run build",
     "test": "npm run clean && npm run test:one",
