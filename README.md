@@ -1,7 +1,7 @@
 ## LCOV file parser
 
 [![node.js build](https://github.com/markusberg/lcov-parse/actions/workflows/master.yaml/badge.svg)](https://github.com/markusberg/lcov-parse/actions/workflows/master.yaml)
-[![coverage](https://markusberg.github.io/lcov-parse/badges/coverage-2.0.3.svg)](https://github.com/markusberg/lcov-parse/actions)
+[![coverage](https://markusberg.github.io/lcov-parse/badges/coverage-2.0.4.svg)](https://github.com/markusberg/lcov-parse/actions)
 ![version](https://img.shields.io/npm/v/lcov-parse.svg)
 
 Simple LCOV file parser to generate JSON and JSON-summary formatted reports.
@@ -18,7 +18,7 @@ Basic usage for loading and parsing an `lcov.info` file:
 
 ```typescript
 import { loadAndParse, type CoverageReport } from "@markusberg/lcov-parse"
-const json: CoverageReport = loadAndParse("./path/to/file.info")
+const json: CoverageReport = await loadAndParse("./path/to/file.info")
 ```
 
 ### Parsing already loaded data
@@ -55,9 +55,9 @@ import {
   generateSummary,
   type CoverageReport,
   type CoverageSummary,
-} from '@markusberg/lcov-parse
+} from "@markusberg/lcov-parse"
 
-const json: CoverageReport = loadAndParse('./path/to/file.info')
+const json: CoverageReport = await loadAndParse("./path/to/file.info")
 const summary: CoverageSummary = generateSummary(json)
 ```
 

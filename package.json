@@ -2,7 +2,7 @@
   "name": "@markusberg/lcov-parse",
   "type": "module",
   "description": "Parse lcov results files and return JSON",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "author": "Dav Glass <davglass@gmail.com>",
   "contributors": [
     "Alan Gutierrez <alan@prettyrobots.com>",

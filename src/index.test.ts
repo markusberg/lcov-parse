@@ -14,11 +14,11 @@ describe("lcov-parse", () => {
 
   describe("the loadAndParse function", () => {
     it("should fail to parse a non-existent file", () => {
-      assert.throws(() => loadAndParse("non-existent-file"))
+      assert.rejects(() => loadAndParse("non-existent-file"))
     })
 
     it("should successfully parse a valid file that exists", () => {
-      assert.doesNotThrow(() => loadAndParse(testDataFile))
+      assert.doesNotReject(() => loadAndParse(testDataFile))
     })
   })
 

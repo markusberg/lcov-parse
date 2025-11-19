@@ -13,7 +13,7 @@ if (!file) {
 }
 
 try {
-  const report = loadAndParse(file)
+  const report = await loadAndParse(file)
   const output = showSummary ? generateSummary(report) : report
   if (pretty) {
     console.log(JSON.stringify(output, null, 2))

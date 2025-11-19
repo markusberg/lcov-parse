@@ -4,9 +4,12 @@
  * @module lcov-parse
  */
 
-import { existsSync, readFileSync } from "node:fs"
+import { createReadStream, existsSync } from "node:fs"
+import { createInterface } from "node:readline"
+
 import { LcovParser } from "./LcovParser.class.js"
 import type { CoverageReport } from "./interfaces.js"
+
 export * from "./interfaces.js"
 export * from "./summary.js"
 
@@ -30,10 +33,17 @@ export function parse(input: string): CoverageReport {
  * @param file file path
  * @returns
  */
-export function loadAndParse(file: string): CoverageReport {
+export async function loadAndParse(file: string): Promise<CoverageReport> {
   if (!existsSync(file)) {
     throw new Error(`file doesn't exist: ${file}`)
   }
-  const fileContent = readFileSync(file).toString()
-  return parse(fileContent)
+
+  const parser = new LcovParser()
+  const fileStream = createReadStream(file)
+  const rl = createInterface({ input: fileStream, crlfDelay: Infinity })
+
+  for await (const line of rl) {
+    parser.parseLine(line)
+  }
+  return parser.getFullReport()
 }
