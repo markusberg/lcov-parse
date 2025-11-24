@@ -1,8 +1,8 @@
 ## LCOV file parser
 
 [![node.js build](https://github.com/markusberg/lcov-parse/actions/workflows/master.yaml/badge.svg)](https://github.com/markusberg/lcov-parse/actions/workflows/master.yaml)
-[![coverage](https://markusberg.github.io/lcov-parse/badges/coverage-2.0.4.svg)](https://github.com/markusberg/lcov-parse/actions)
-![version](https://img.shields.io/npm/v/lcov-parse.svg)
+[![coverage](https://markusberg.github.io/lcov-parse/badges/coverage-3.0.0.svg)](https://github.com/markusberg/lcov-parse/actions)
+![version](https://img.shields.io/npm/v/@markusberg/lcov-parse.svg)
 
 Simple LCOV file parser to generate JSON and JSON-summary formatted reports.
 
